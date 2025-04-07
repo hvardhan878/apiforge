@@ -4,6 +4,7 @@ import os
 from dotenv import load_dotenv
 from fastapi.responses import HTMLResponse
 from datetime import datetime
+from .routers import items
 
 # Load environment variables
 load_dotenv()
@@ -24,6 +25,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+app.include_router(items.router, prefix="/api/items", tags=["Items"])
 
 @app.get("/api/version")
 def get_version():
